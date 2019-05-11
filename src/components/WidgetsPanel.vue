@@ -16,12 +16,14 @@
         </widget-station>
       </div>
     </div>
-    <pre>{{stationsIds}}</pre>
+    <pre>{{stationsIds}}</pre><button @click="FETCH_ITEMS(stationsIds)" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded">refresh</button>
   </section>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import {
+  mapState, mapGetters, mapMutations, mapActions,
+} from 'vuex';
 
 export default {
   name: 'WidgetsPanel',
@@ -35,6 +37,7 @@ export default {
   },
   methods: {
     ...mapMutations(['DELETE_STATION']),
+    ...mapActions(['FETCH_ITEMS']),
   },
 };
 </script>
