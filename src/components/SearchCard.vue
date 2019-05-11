@@ -61,7 +61,7 @@ export default {
         return false;
       }
       if (this.disabled) {
-        this.errors.push('Can\'t add station, there are already 10 of them');
+        this.errors.push('Can\'t add station, there are already 10 of them.');
         return false;
       }
       return true;
@@ -79,7 +79,7 @@ export default {
         .catch((e) => {
           //  TODO: toastr error msg
           console.log('%c Line 53 -> ', 'color: #FFFF00 ;', e);
-          console.log('%c Line 53 -> ', 'color: #FFFF00 ;', 'Could\'t get data... 💀');
+          console.log('%c Line 53 -> ', 'color: #FFFF00 ;', 'Could\'t get data, city not found... 💀');
         })
         .finally(() => {
           this.pending = false;

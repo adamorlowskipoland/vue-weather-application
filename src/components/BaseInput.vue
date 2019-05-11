@@ -1,5 +1,9 @@
 <template>
-  <label for="username" v-bind="restAttrs">
+  <label
+    for="username"
+    class="label"
+    v-bind="restAttrs"
+  >
     <span class="inline-block mb-4 text-lg" v-text="label"></span>
     <input
       id="username"
@@ -14,10 +18,12 @@
       :value="value"
       @input="updateValue"
     >
-    <span
-      v-if="errorText"
-      class="text-red-dark font-light mt-2 inline-block"
-    >{{errorText}}</span>
+    <transition name="fade">
+      <span
+        v-if="errorText"
+        class="error"
+      >{{errorText}}</span>
+    </transition>
   </label>
 </template>
 <script>
@@ -79,7 +85,15 @@ export default {
 };
 </script>
 <style lang="scss">
+  .label {
+    @apply relative;
+    min-width: 340px;
+  }
   .input {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight
+  }
+  .error {
+    @apply text-red-dark font-light mt-2 flex block absolute pin-l pin-b;
+    transform: translateY(140%);
   }
 </style>

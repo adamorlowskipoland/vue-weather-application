@@ -10,9 +10,9 @@
     <p class="mb-4">
       Sunset: {{ props.station.sys.sunset | formatTime }}
     </p>
-    <span class="absolute pin-t pin-b pin-r px-4 py-4 flex items-end" @click="listeners.click">
+    <span class="absolute pin-b pin-r p-4" @click="listeners.click">
       <svg
-        class="fill-current h-6 w-6 text-red"
+        class="station__close"
         role="button"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
@@ -50,5 +50,12 @@ export default {
       @apply p-1 -ml-1 bg-white absolute pin-t font-bold tracking-wide;
       transform: translateY(-50%);
      }
+    &__close {
+      @apply fill-current h-6 w-6 text-red rounded-full;
+      transition: background-color .3s ease;
+      &:hover {
+        @apply bg-pink-lightest;
+      }
+    }
   }
 </style>
