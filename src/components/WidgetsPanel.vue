@@ -1,5 +1,5 @@
 <template>
-  <section class="panel"><pre class="mb-5">{{stations}}</pre>
+  <section class="panel">
     <div class="flex -mx-2 mb-4 flex-wrap">
       <div
         v-for="station in stations"
