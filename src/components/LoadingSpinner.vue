@@ -2,12 +2,13 @@
   <img
     src="http://www.sageflyfish.com/resources/admin/widgets/loading.gif"
     alt="loading"
+    class="loading"
     :class="props.classes"
   >
 </template>
 <script>
 export default {
-  name: 'TheLoadingSpinner',
+  name: 'LoadingSpinner',
   props: {
     classes: {
       type: Array,
@@ -17,10 +18,10 @@ export default {
 };
 </script>
 <style>
-  .loader {
+  .loading {
     position: absolute;
-    top: 50%;
-    right: 2.5rem;
+    top: .3rem;
+    right: .3rem;
     transform: translateY(-10%);
     max-width: 25px;
   }

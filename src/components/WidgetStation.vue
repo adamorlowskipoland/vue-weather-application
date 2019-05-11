@@ -1,6 +1,7 @@
 <template functional>
   <div class="station">
     <h4 class="station__location text-md">{{ props.station.name }}</h4>
+    <slot name="loader"></slot>
     <p class="mb-4">Current: {{ props.station.main.temp }} &#8451;</p>
     <p class="mb-4">Min: {{ props.station.main.temp_min }} &#8451;</p>
     <p class="mb-4">Max: {{ props.station.main.temp_max }} &#8451;</p>

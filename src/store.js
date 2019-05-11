@@ -12,6 +12,11 @@ export default new Vuex.Store({
   state: {
     stations,
   },
+  getters: {
+    stationsIds(state) {
+      console.log('%c Line 17 -> ', 'color: #FFFF00 ;', 'stationsIds');
+    },
+  },
   mutations: {
     ADD_STATION(state, newStation) {
       const stationAlreadyAdded = state.stations.find(station => station.id === newStation.id);

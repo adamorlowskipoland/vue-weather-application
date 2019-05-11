@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <section class="panel">
     <div class="flex -mx-2 mb-4 flex-wrap">
       <div
@@ -9,23 +9,29 @@
         <widget-station
           v-bind="{station}"
           @click="DELETE_STATION(station.id)"
-        ></widget-station>
+        >
+          <template v-slot:loader>
+            <loading-spinner />
+          </template>
+        </widget-station>
       </div>
     </div>
+    <pre>{{stationsIds}}</pre>
   </section>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-import WidgetStation from '@/components/WidgetStation.vue';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'WidgetsPanel',
   components: {
-    WidgetStation,
+    WidgetStation: () => import('@/components/WidgetStation.vue'),
+    LoadingSpinner: () => import('@/components/LoadingSpinner.vue'),
   },
   computed: {
     ...mapState(['stations']),
+    ...mapGetters(['stationsIds']),
   },
   methods: {
     ...mapMutations(['DELETE_STATION']),

@@ -30,7 +30,7 @@
 </template>
 <script>
 import nativeToast from 'native-toast';
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import BaseInput from './BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
@@ -49,7 +49,6 @@ export default {
     };
   },
   computed: {
-    ...mapState(['postalCodes']),
     disabled() {
       return this.pending || this.$store.state.stations.length >= this.$options.widgetsLimit;
     },
