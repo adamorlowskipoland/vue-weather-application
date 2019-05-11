@@ -8,19 +8,20 @@
         v-model="query"
         label="Search for a city"
         placeholder="Enter zipcode for Switzerland"
-        :disabled="disabled"
+        :disabled="pending"
         class="block text-grey-darker font-bold"
       />
       <base-button
         class="ml-4"
-        :class="{'opacity-50 cursor-not-allowed': disabled}"
-        :disabled="disabled"
+        :class="{'opacity-50 cursor-not-allowed': pending}"
+        :disabled="pending"
         type="submit"
       >Add station</base-button>
     </form>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 import BaseInput from './BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
@@ -33,13 +34,27 @@ export default {
   data() {
     return {
       query: '',
-      disabled: false,
+      pending: false,
+      error: '',
     };
   },
   methods: {
-    submit(val) {
-      console.log('%c Line 44 -> ', 'color: #FFFF00 ;', this.query);
-      // this.$emit('input', this.query);
+    ...mapActions(['FETCH_ITEM']),
+    submit() {
+      //  TODO: add validation on swiss postal Code
+
+      console.log('%c Line 44 -> ', 'color: lightseagreen ;', this.query);
+      this.pending = true;
+      this.FETCH_ITEM('dupa')
+        .then((res) => {
+          console.log('%c Line 50 -> ', 'color: #FFFF00 ;', res);
+        })
+        .catch((e) => {
+          console.log('%c Line 53 -> ', 'color: #FFFF00 ;', e);
+        })
+        .finally(() => {
+          this.pending = false;
+        });
     },
   },
 };
