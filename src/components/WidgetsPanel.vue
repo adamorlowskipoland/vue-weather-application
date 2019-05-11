@@ -7,7 +7,7 @@
         class="column"
       >
         <widget-station
-          :data="station"
+          v-bind="{station}"
           @click="deleteStation"
         ></widget-station>
       </div>

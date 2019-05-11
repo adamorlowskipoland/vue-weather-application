@@ -1,11 +1,15 @@
 <template functional>
   <div class="station">
-    <h4 class="station__location text-md">{{ props.data.location }}</h4>
-    <p class="mb-4">Current: {{ props.data.current }}</p>
-    <p class="mb-4">Min: {{ props.data.min }}</p>
-    <p class="mb-4">Max: {{ props.data.max }}</p>
-    <p class="mb-4">Sunrise: {{ props.data.sunrise }}</p>
-    <p class="mb-4">Sunset: {{ props.data.sunset }}</p>
+    <h4 class="station__location text-md">{{ props.station.name }}</h4>
+    <p class="mb-4">Current: {{ props.station.main.temp }}&#176;</p>
+    <p class="mb-4">Min: {{ props.station.main.temp_min }}&#176;</p>
+    <p class="mb-4">Max: {{ props.station.main.temp_max }}&#8451;</p>
+    <p class="mb-4">
+      Sunrise: {{ props.station.sys.sunrise | formatTime }}
+    </p>
+    <p class="mb-4">
+      Sunset: {{ props.station.sys.sunset | formatTime }}
+    </p>
     <span class="absolute pin-t pin-b pin-r px-4 py-4 flex items-end" @click="listeners.click">
       <svg
         class="fill-current h-6 w-6 text-red"
@@ -26,9 +30,14 @@
 export default {
   name: 'WidgetStation',
   props: {
-    data: {
+    station: {
       type: Object,
       required: true,
+    },
+  },
+  filters: {
+    formatTime(val) {
+      return new Date(val * 1000).toLocaleTimeString('ch-CH', {});
     },
   },
 };
