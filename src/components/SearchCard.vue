@@ -29,6 +29,7 @@
   </div>
 </template>
 <script>
+import nativeToast from 'native-toast';
 import { mapState, mapActions } from 'vuex';
 import BaseInput from './BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
@@ -71,7 +72,6 @@ export default {
       return true;
     },
     submit() {
-      console.log('%c Line 44 -> ', 'color: lightseagreen ;', this.query);
       const searchQueryValid = this.validate(this.query);
       if (!searchQueryValid) return;
       this.pending = true;
@@ -80,10 +80,14 @@ export default {
           this.query = '';
           this.errors = [];
         })
-        .catch((e) => {
-          //  TODO: toastr error msg
-          console.log('%c Line 53 -> ', 'color: #FFFF00 ;', e);
-          console.log('%c Line 53 -> ', 'color: #FFFF00 ;', 'Could\'t get data, city not found... 💀');
+        .catch(() => {
+          nativeToast({
+            message: 'City not found... 💀!',
+            position: 'north-east',
+            timeout: 5000,
+            type: 'info',
+            closeOnClick: true,
+          });
         })
         .finally(() => {
           this.pending = false;
