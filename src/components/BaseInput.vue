@@ -54,8 +54,6 @@ export default {
   methods: {
     updateValue(event) {
       const updatedValue = event.target.value.trim();
-      // const formatedValue = updatedValue.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
-      // console.log(formatedValue);
       clearTimeout(this.debounce);
       if (updatedValue === this.value) return;
       this.debounce = setTimeout(() => {

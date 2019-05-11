@@ -1,22 +1,11 @@
 <template>
-  <div class="home p-10">
-    <header class="container mx-auto">
+  <div class="home container mx-auto p-10">
+    <header class="">
       <h1 class="xl:text-3xl mb-10 text-center">Weather Application</h1>
-      <search-card v-model="query" :loading="loading"></search-card>
-      <!--<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 flex items-end">-->
-        <!--<base-input-->
-          <!--v-model="query"-->
-          <!--label="Search for a city"-->
-          <!--placeholder="Enter zipcode for Switzerland"-->
-          <!--:disabled="loading"-->
-          <!--class="block text-grey-darker font-bold"-->
-          <!--:debounceTime="700"-->
-        <!--/>-->
-        <!--<base-button class="ml-4">Add station</base-button>-->
-      <!--</form>-->
+      <search-card />
     </header>
     <main class="container mx-auto my-10">
-      widgets
+      <widgets-panel />
     </main>
   </div>
 </template>
@@ -24,16 +13,16 @@
 <script>
 // @ is an alias to /src
 import SearchCard from '@/components/SearchCard.vue';
+import WidgetsPanel from '@/components/WidgetsPanel.vue';
 
 export default {
   name: 'home',
   components: {
     SearchCard,
+    WidgetsPanel,
   },
   data() {
     return {
-      query: '',
-      loading: false,
     };
   },
 };
