@@ -4,21 +4,25 @@
       class="form"
       @submit.prevent="submit"
     >
-      <base-input
-        v-model="query"
-        :errorText="error"
-        label="Search for a city"
-        type="number"
-        placeholder="Enter zipcode for Switzerland"
-        :disabled="pending"
-        class="block text-grey-darker font-bold"
-      />
+      <fieldset :disabled="pending">
+        <base-input
+          ref="input"
+          v-model="query"
+          :errorText="error"
+          label="Search for a city"
+          type="number"
+          placeholder="Enter zipcode for Switzerland"
+          :disabled="pending"
+          class="block text-grey-darker font-bold"
+        />
+      </fieldset>
       <base-button
         class="ml-4"
         :class="{'opacity-50 cursor-not-allowed': pending}"
         :disabled="pending"
         type="submit"
-      >Add station</base-button>
+      >Add station
+      </base-button>
     </form>
   </div>
 </template>
@@ -54,14 +58,19 @@ export default {
       if (!searchQueryValid) return;
       this.pending = true;
       this.FETCH_ITEM(this.query)
+        .then(() => {
+          this.query = '';
+        })
         .catch((e) => {
           //  TODO: toastr error msg
           console.log('%c Line 53 -> ', 'color: #FFFF00 ;', e);
           console.log('%c Line 53 -> ', 'color: #FFFF00 ;', 'Could\'t get data... 💀');
         })
         .finally(() => {
-          this.query = '';
           this.pending = false;
+          this.$nextTick(() => {
+            this.$refs.input.$el.querySelector('input').focus();
+          });
         });
     },
   },
@@ -69,6 +78,7 @@ export default {
 </script>
 <style>
   .form {
-    @apply bg-white shadow-md rounded px-8 pt-6 pb-8 flex items-end relative;
+    @apply bg-white
+    shadow-md rounded px-8 pt-6 pb-8 flex items-end;
   }
 </style>
