@@ -14,6 +14,11 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_STATION(state, newStation) {
+      const stationAlreadyAdded = state.stations.find(station => station.id === newStation.id);
+      if (stationAlreadyAdded) {
+        console.error('%c Line 20 -> ', 'color: skyblue ;', 'This station is already in use');
+        return;
+      }
       state.stations.push(newStation);
     },
     DELETE_STATION(state, id) {
