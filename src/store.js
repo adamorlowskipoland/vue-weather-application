@@ -1,12 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import defaultStations from './devStations';
 import { saveStatePlugin } from './utils';
 
 Vue.use(Vuex);
 
-const stations = JSON.parse(localStorage.getItem('stations')) || defaultStations;
+const stations = JSON.parse(localStorage.getItem('stations')) || [];
 
 export default new Vuex.Store({
   plugins: [saveStatePlugin],
@@ -26,6 +25,10 @@ export default new Vuex.Store({
         return;
       }
       state.stations.push(newStation);
+    },
+    DELETE_STATION(state, id) {
+      console.log('%c Line 18 -> ', 'color: skyblue ;', 'DELETE_STATION', id);
+      state.stations = state.stations.filter(station => station.id !== id);
     },
   },
   actions: {

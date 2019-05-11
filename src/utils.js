@@ -6,7 +6,6 @@ export function saveStatePlugin(store) {
   store.subscribe(
     (mutation, state) => {
       localStorage.setItem('stations', JSON.stringify(state.stations));
-      localStorage.setItem('postalCodes', JSON.stringify(state.postalCodes));
     },
   );
 }

@@ -2,13 +2,14 @@
   <div class="inline-block">
     <form
       class="form"
+      :title="disabled && 'Only 10 widgets can be added.'"
       @submit.prevent="submit"
     >
-      <fieldset :disabled="pending">
+      <fieldset :disabled="disabled">
         <base-input
           ref="input"
           v-model="query"
-          :errorText="error"
+          :errorText="errors[0]"
           label="Search for a city"
           type="number"
           placeholder="Enter zipcode for Switzerland"
@@ -18,8 +19,8 @@
       </fieldset>
       <base-button
         class="ml-4"
-        :class="{'opacity-50 cursor-not-allowed': pending}"
-        :disabled="pending"
+        :class="{'opacity-50 cursor-not-allowed': disabled}"
+        :disabled="disabled"
         type="submit"
       >Add station
       </base-button>
@@ -27,7 +28,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import BaseInput from './BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
@@ -41,16 +42,29 @@ export default {
     return {
       query: '',
       pending: false,
-      error: '',
+      errors: [],
     };
+  },
+  computed: {
+    ...mapState(['postalCodes']),
+    disabled() {
+      return this.pending || this.$store.state.stations.length >= 10;
+    },
   },
   methods: {
     ...mapActions(['FETCH_ITEM']),
     validate(val) {
       //  TODO: add validation on swiss postal Code
-      const valid = val.length === 4;
-      this.error = valid ? '' : 'Input must be 4 digits';
-      return valid;
+      this.errors = [];
+      if (!(val.length === 4)) {
+        this.errors.push('Input must be 4 digits');
+        return false;
+      }
+      if (this.disabled) {
+        this.errors.push('Can\'t add station, there are already 10 of them');
+        return false;
+      }
+      return true;
     },
     submit() {
       console.log('%c Line 44 -> ', 'color: lightseagreen ;', this.query);
@@ -60,6 +74,7 @@ export default {
       this.FETCH_ITEM(this.query)
         .then(() => {
           this.query = '';
+          this.errors = [];
         })
         .catch((e) => {
           //  TODO: toastr error msg
@@ -78,7 +93,6 @@ export default {
 </script>
 <style>
   .form {
-    @apply bg-white
-    shadow-md rounded px-8 pt-6 pb-8 flex items-end;
+    @apply bg-white shadow rounded px-8 pt-6 pb-8 flex items-end;
   }
 </style>

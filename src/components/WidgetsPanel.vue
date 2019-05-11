@@ -8,7 +8,7 @@
       >
         <widget-station
           v-bind="{station}"
-          @click="deleteStation"
+          @click="DELETE_STATION(station.id)"
         ></widget-station>
       </div>
     </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import WidgetStation from '@/components/WidgetStation.vue';
 
 export default {
@@ -28,9 +28,7 @@ export default {
     ...mapState(['stations']),
   },
   methods: {
-    deleteStation(val) {
-      console.log('%c Line 31 -> ', 'color: #FFFF00 ;', val);
-    },
+    ...mapMutations(['DELETE_STATION']),
   },
 };
 </script>
