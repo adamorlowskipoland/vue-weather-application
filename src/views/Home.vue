@@ -21,9 +21,5 @@ export default {
     SearchCard,
     WidgetsPanel,
   },
-  data() {
-    return {
-    };
-  },
 };
 </script>

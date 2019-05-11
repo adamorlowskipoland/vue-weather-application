@@ -3,7 +3,7 @@
     <span class="inline-block mb-4 text-lg" v-text="label"></span>
     <input
       id="username"
-      type="text"
+      :type="type"
       aria-label="City"
       class="input focus:outline-none focus:shadow-outline"
       :class="disabled && 'opacity-50 cursor-not-allowed'"
@@ -14,6 +14,10 @@
       :value="value"
       @input="updateValue"
     >
+    <span
+      v-if="errorText"
+      class="text-red-dark font-light mt-2 inline-block"
+    >{{errorText}}</span>
   </label>
 </template>
 <script>
@@ -26,6 +30,10 @@ export default {
     debounceTime: {
       type: Number,
       default: 0,
+    },
+    errorText: {
+      type: String,
+      default: '',
     },
   },
   data() {
@@ -42,6 +50,10 @@ export default {
       const { placeholder, attrs } = this.$attrs;
       return placeholder;
     },
+    type() {
+      const { type, attrs } = this.$attrs;
+      return type;
+    },
     disabled() {
       const { disabled, attrs } = this.$attrs;
       return disabled;
@@ -57,7 +69,6 @@ export default {
       clearTimeout(this.debounce);
       if (updatedValue === this.value) return;
       this.debounce = setTimeout(() => {
-        console.log(updatedValue);
         this.$emit('input', updatedValue);
       }, this.debounceTime);
     },

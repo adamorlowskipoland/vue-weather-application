@@ -6,7 +6,9 @@
     >
       <base-input
         v-model="query"
+        :errorText="error"
         label="Search for a city"
+        type="number"
         placeholder="Enter zipcode for Switzerland"
         :disabled="pending"
         class="block text-grey-darker font-bold"
@@ -40,19 +42,25 @@ export default {
   },
   methods: {
     ...mapActions(['FETCH_ITEM']),
-    submit() {
+    validate(val) {
       //  TODO: add validation on swiss postal Code
-
+      const valid = val.length === 4;
+      this.error = valid ? '' : 'Input must be 4 digits';
+      return valid;
+    },
+    submit() {
       console.log('%c Line 44 -> ', 'color: lightseagreen ;', this.query);
+      const searchQueryValid = this.validate(this.query);
+      if (!searchQueryValid) return;
       this.pending = true;
-      this.FETCH_ITEM('dupa')
-        .then((res) => {
-          console.log('%c Line 50 -> ', 'color: #FFFF00 ;', res);
-        })
+      this.FETCH_ITEM(this.query)
         .catch((e) => {
+          //  TODO: toastr error msg
           console.log('%c Line 53 -> ', 'color: #FFFF00 ;', e);
+          console.log('%c Line 53 -> ', 'color: #FFFF00 ;', 'Could\'t get data... 💀');
         })
         .finally(() => {
+          this.query = '';
           this.pending = false;
         });
     },
