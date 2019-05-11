@@ -4,7 +4,7 @@
       <div
         v-for="station in stations"
         :key="station.id"
-        class="column"
+        class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-2 mb-12"
       >
         <widget-station
           v-bind="{station}"
@@ -32,9 +32,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .column {
-    @apply w-1/5 px-2 mb-12 ;
-  }
-</style>

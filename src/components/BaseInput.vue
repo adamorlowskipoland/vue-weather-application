@@ -93,7 +93,8 @@ export default {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight
   }
   .error {
-    @apply text-red-dark font-light mt-2 flex block absolute pin-l pin-b;
-    transform: translateY(140%);
+    @apply text-red-dark font-light flex block absolute pin-l pin-b;
+    transform: translateY(120%);
+    max-width: 65%;
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <button :type="type" class="button" :class="typeClasses">
+  <button :type="type" class="button md:font-bold" :class="typeClasses">
     <slot/>
   </button>
 </template>
@@ -28,6 +28,6 @@ export default {
 
 <style lang="css" scoped>
   .button {
-    @apply inline-flex px-4 py-2 text-white font-bold rounded items-center leading-tight;
+    @apply px-4 py-2 text-white rounded items-center leading-tight;
   }
 </style>

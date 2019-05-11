@@ -10,7 +10,7 @@
     <p class="mb-4">
       Sunset: {{ props.station.sys.sunset | formatTime }}
     </p>
-    <span class="absolute pin-b pin-r p-4" @click="listeners.click">
+    <span class="absolute pin-b pin-r p-2" @click="listeners.click">
       <svg
         class="station__close"
         role="button"

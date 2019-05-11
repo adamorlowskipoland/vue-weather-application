@@ -1,5 +1,5 @@
 <template>
-  <div class="home container mx-auto p-10">
+  <div class="home container mx-auto p-1 sm:p-4 lg:p-10">
     <header class="">
       <h1 class="xl:text-3xl mb-10 text-center">Weather Application</h1>
       <search-card />

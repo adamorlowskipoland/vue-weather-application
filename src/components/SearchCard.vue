@@ -1,7 +1,7 @@
 <template>
-  <div class="inline-block">
+  <div class="block max-w-md">
     <form
-      class="form"
+      class="form sm:flex items-end justify-around p-4 md:px-8 sm:pt-6 sm:pb-12"
       :title="disabled && 'Only 10 widgets can be added.'"
       @submit.prevent="submit"
     >
@@ -17,13 +17,14 @@
           class="block text-grey-darker font-bold"
         />
       </fieldset>
-      <base-button
-        class="ml-4"
-        :class="{'opacity-50 cursor-not-allowed': disabled}"
-        :disabled="disabled"
-        type="submit"
-      >Add station
-      </base-button>
+      <div class="text-right">
+        <base-button
+          class="mt-4"
+          :class="{'opacity-50 cursor-not-allowed': disabled}"
+          :disabled="disabled"
+          type="submit"
+        >Add station
+        </base-button></div>
     </form>
   </div>
 </template>
@@ -34,6 +35,7 @@ import BaseButton from '@/components/BaseButton.vue';
 
 export default {
   name: 'SearchCard',
+  widgetsLimit: 10,
   components: {
     BaseInput,
     BaseButton,
@@ -48,7 +50,7 @@ export default {
   computed: {
     ...mapState(['postalCodes']),
     disabled() {
-      return this.pending || this.$store.state.stations.length >= 10;
+      return this.pending || this.$store.state.stations.length >= this.$options.widgetsLimit;
     },
   },
   methods: {
@@ -61,7 +63,9 @@ export default {
         return false;
       }
       if (this.disabled) {
-        this.errors.push('Can\'t add station, there are already 10 of them.');
+        this.errors.push(
+          `Can't add station, there are already ${this.$options.widgetsLimit} of them.`,
+        );
         return false;
       }
       return true;
@@ -93,6 +97,6 @@ export default {
 </script>
 <style>
   .form {
-    @apply bg-white shadow rounded px-8 pt-6 pb-8 flex items-end;
+    @apply bg-white shadow rounded;
   }
 </style>
