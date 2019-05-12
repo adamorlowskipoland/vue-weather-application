@@ -2,6 +2,7 @@
   <div class="station">
     <h4 class="station__location text-md">{{ station.name }}</h4>
     <slot name="loader"></slot>
+    <slot name="action"></slot>
     <p class="mb-4">Current: {{ station.main.temp }} &#8451;</p>
     <p class="mb-4">Min: {{ station.main.temp_min }} &#8451;</p>
     <p class="mb-4">Max: {{ station.main.temp_max }} &#8451;</p>

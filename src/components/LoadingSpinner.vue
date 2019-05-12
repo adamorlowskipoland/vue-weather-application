@@ -20,8 +20,8 @@ export default {
 <style>
   .loading {
     position: absolute;
-    top: .3rem;
-    right: .3rem;
+    bottom: .3rem;
+    left: .3rem;
     transform: translateY(-10%);
     max-width: 25px;
   }
