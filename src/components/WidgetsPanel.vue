@@ -72,21 +72,37 @@ export default {
 </script>
 <style lang="scss">
   .highlight {
-    -webkit-animation: HIGHLIGHTING-ANIMATION 2s infinite; /* Safari 4+ */
-    -moz-animation:    HIGHLIGHTING-ANIMATION 2s infinite; /* Fx 5+ */
-    -o-animation:      HIGHLIGHTING-ANIMATION 2s infinite; /* Opera 12+ */
-    animation:         HIGHLIGHTING-ANIMATION 2s infinite; /* IE 10+, Fx 29+ */
+    -webkit-animation: HIGHLIGHTING-ANIMATION 1s infinite; /* Safari 4+ */
+    -moz-animation:    HIGHLIGHTING-ANIMATION 1s infinite; /* Fx 5+ */
+    -o-animation:      HIGHLIGHTING-ANIMATION 1s infinite; /* Opera 12+ */
+    animation:         HIGHLIGHTING-ANIMATION 1s infinite; /* IE 10+, Fx 29+ */
   }
   @-webkit-keyframes HIGHLIGHTING-ANIMATION {
-    50% { @apply shadow-lg; transform: scale(1.05); }
+    50% {
+      @apply shadow-lg;
+      transform: scale(1.05);
+      border: 1px solid #fcc600;
+    }
   }
   @-moz-keyframes HIGHLIGHTING-ANIMATION {
-    50% { @apply shadow-lg; transform: scale(1.05); }
+    50% {
+      @apply shadow-lg;
+      transform: scale(1.05);
+      border: 1px solid #fcc600;
+    }
   }
   @-o-keyframes HIGHLIGHTING-ANIMATION {
-    50% { @apply shadow-lg; transform: scale(1.05); }
+    50% {
+      @apply shadow-lg;
+      transform: scale(1.05);
+      border: 1px solid #fcc600;
+    }
   }
   @keyframes HIGHLIGHTING-ANIMATION {
-    50% { @apply shadow-lg; transform: scale(1.05); }
+    50% {
+      @apply shadow-lg;
+      transform: scale(1.05);
+      border: 1px solid #fcc600;
+    }
   }
 </style>
