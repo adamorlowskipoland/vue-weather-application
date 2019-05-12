@@ -45,7 +45,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .station {
-    @apply relative border border-blue-dark shadow-md p-4 pt-12;
+    @apply relative border-l-4 shadow-md p-2 pt-12 pb-6;
     transition: background-color .3s ease, color .3s ease;
     &__location {
       @apply p-1 -ml-1 bg-white text-black absolute pin-t font-bold tracking-wide;

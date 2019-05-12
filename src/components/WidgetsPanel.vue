@@ -10,8 +10,8 @@
           <widget-station
             v-bind="{station}"
             :class="{
-              'bg-blue text-white': isTemp('min', station.main.temp),
-              'bg-red text-white': isTemp('max', station.main.temp),
+              'border-blue': minCurrentTemp === station.main.temp,
+              'border-red': maxCurrentTemp === station.main.temp,
               'highlight': station.id === repeatedId
             }"
             @click="DELETE_STATION(station.id)"
@@ -52,18 +52,19 @@ export default {
   },
   computed: {
     ...mapState(['stations', 'repeatedId']),
-    ...mapGetters(['stationsIds']),
+    ...mapGetters(['stationsIds', 'currentTemps']),
     refreshDelay() {
       return 1000 * 60 * 10; // 10 min.
     },
-    isTemp() {
-      return (condition, stationTemp) => {
-        if (this.stations.length < 2) return;
-        const temps = this.stations.map(station => station.main.temp);
-        const conditionalTemp = Math[condition].apply(0, temps);
-        console.log('%c Line 26 -> ', 'color: #FFFF00 ;', 'conditionalTemp', conditionalTemp);
-        return conditionalTemp === stationTemp;
-      };
+    minCurrentTemp() {
+      if (this.stations.length < 2) return;
+      console.log('%c Line 67 -> ', 'color: #FFFF00 ;', 'minct');
+      return Math.min.apply(0, this.currentTemps);
+    },
+    maxCurrentTemp() {
+      if (this.stations.length < 2) return;
+      console.log('%c Line 71 -> ', 'color: #FFFF00 ;', 'maxct');
+      return Math.max.apply(0, this.currentTemps);
     },
   },
   methods: {

@@ -17,6 +17,9 @@ export default new Vuex.Store({
     stationsIds(state) {
       return state.stations.map(station => station.id).join(',');
     },
+    currentTemps(state) {
+      return state.stations.map(station => station.main.temp);
+    },
   },
   mutations: {
     ADD_STATION(state, newStation) {
