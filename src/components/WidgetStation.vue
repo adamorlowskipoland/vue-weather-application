@@ -43,7 +43,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
   .station {
     @apply relative border border-blue-dark shadow-md p-4 pt-12;

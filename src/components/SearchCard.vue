@@ -79,9 +79,10 @@ export default {
           this.query = '';
           this.errors = [];
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log('%c Line 83 -> ', 'color: #FFFF00 ;', 'message', error);
           nativeToast({
-            message: 'City not found... 💀!',
+            message: error,
             position: 'north-east',
             timeout: 5000,
             type: 'info',
