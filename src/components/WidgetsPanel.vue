@@ -6,23 +6,24 @@
         :key="station.id"
         class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-2 mb-12"
       >
-        <div
-          :class="{'highlight': station.id === repeatedId}"
-        >
-          <transition name="fade">
-            <widget-station
-              v-bind="{station}"
-              @click="DELETE_STATION(station.id)"
+        <transition name="fade">
+          <widget-station
+            v-bind="{station}"
+            :class="{
+              'bg-blue text-white': isTemp('min', station.main.temp),
+              'bg-red text-white': isTemp('max', station.main.temp),
+              'highlight': station.id === repeatedId
+            }"
+            @click="DELETE_STATION(station.id)"
+          >
+            <template
+              v-if="refreshPending"
+              v-slot:loader
             >
-              <template
-                v-if="refreshPending"
-                v-slot:loader
-              >
-                <loading-spinner />
-              </template>
-            </widget-station>
-          </transition>
-        </div>
+              <loading-spinner />
+            </template>
+          </widget-station>
+        </transition>
       </div>
     </div>
     <loop-fire
@@ -55,6 +56,15 @@ export default {
     refreshDelay() {
       return 1000 * 60 * 10; // 10 min.
     },
+    isTemp() {
+      return (condition, stationTemp) => {
+        if (this.stations.length < 2) return;
+        const temps = this.stations.map(station => station.main.temp);
+        const conditionalTemp = Math[condition].apply(0, temps);
+        console.log('%c Line 26 -> ', 'color: #FFFF00 ;', 'conditionalTemp', conditionalTemp);
+        return conditionalTemp === stationTemp;
+      };
+    },
   },
   methods: {
     ...mapMutations(['DELETE_STATION']),
@@ -70,7 +80,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .highlight {
     -webkit-animation: HIGHLIGHTING-ANIMATION 1s infinite; /* Safari 4+ */
     -moz-animation:    HIGHLIGHTING-ANIMATION 1s infinite; /* Fx 5+ */

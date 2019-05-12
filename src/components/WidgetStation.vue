@@ -1,17 +1,17 @@
-<template functional>
+<template>
   <div class="station">
-    <h4 class="station__location text-md">{{ props.station.name }}</h4>
+    <h4 class="station__location text-md">{{ station.name }}</h4>
     <slot name="loader"></slot>
-    <p class="mb-4">Current: {{ props.station.main.temp }} &#8451;</p>
-    <p class="mb-4">Min: {{ props.station.main.temp_min }} &#8451;</p>
-    <p class="mb-4">Max: {{ props.station.main.temp_max }} &#8451;</p>
+    <p class="mb-4">Current: {{ station.main.temp }} &#8451;</p>
+    <p class="mb-4">Min: {{ station.main.temp_min }} &#8451;</p>
+    <p class="mb-4">Max: {{ station.main.temp_max }} &#8451;</p>
     <p class="mb-4">
-      Sunrise: {{ props.station.sys.sunrise | formatTime }}
+      Sunrise: {{ station.sys.sunrise | formatTime }}
     </p>
     <p class="mb-4">
-      Sunset: {{ props.station.sys.sunset | formatTime }}
+      Sunset: {{ station.sys.sunset | formatTime }}
     </p>
-    <span class="absolute pin-b pin-r p-2" @click="listeners.click">
+    <span class="absolute pin-b pin-r p-2" @click="$emit('click')">
       <svg
         class="station__close"
         role="button"
@@ -46,8 +46,9 @@ export default {
 <style lang="scss" scoped>
   .station {
     @apply relative border border-blue-dark shadow-md p-4 pt-12;
+    transition: background-color .3s ease, color .3s ease;
     &__location {
-      @apply p-1 -ml-1 bg-white absolute pin-t font-bold tracking-wide;
+      @apply p-1 -ml-1 bg-white text-black absolute pin-t font-bold tracking-wide;
       transform: translateY(-50%);
      }
     &__close {

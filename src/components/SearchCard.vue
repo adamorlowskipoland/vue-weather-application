@@ -80,7 +80,7 @@ export default {
           this.errors = [];
         })
         .catch((error) => {
-          console.log('%c Line 83 -> ', 'color: #FFFF00 ;', 'message', error);
+          console.error('%c Line 83 -> ', 'color: #FCAA00 ;', error);
           nativeToast({
             message: error,
             position: 'north-east',
