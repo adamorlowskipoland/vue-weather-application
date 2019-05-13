@@ -1,5 +1,8 @@
 <template>
-  <div class="block max-w-md">
+  <div
+    class="block max-w-md border-l-4 shadow"
+    :class="{'border-green': !disabled}"
+  >
     <form
       class="form sm:flex items-end justify-around p-4 md:px-8 sm:pt-6 sm:pb-12"
       :title="disabled && 'Only 10 widgets can be added.'"
@@ -56,19 +59,19 @@ export default {
   methods: {
     ...mapActions(['FETCH_ITEM']),
     validate(val) {
-      //  TODO: add validation on swiss postal Code
       this.errors = [];
       if (!(val.length === 4)) {
         this.errors.push('Input must be 4 digits');
-        return false;
+      }
+      if (+val < 1000) {
+        this.errors.push('Swiss codes starts from 1000');
       }
       if (this.disabled) {
         this.errors.push(
           `Can't add station, there are already ${this.$options.widgetsLimit} of them.`,
         );
-        return false;
       }
-      return true;
+      return !this.errors.length;
     },
     submit() {
       const searchQueryValid = this.validate(this.query);
