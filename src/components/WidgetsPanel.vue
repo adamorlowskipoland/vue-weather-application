@@ -1,6 +1,9 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <section class="panel">
-    <sortable-list>
+    <sortable-list
+      :value="stations"
+      @input="UPDATE_STATIONS"
+    >
       <div class="flex -mx-2 mb-4 flex-wrap outline-none">
         <sortable-item
           v-for="station in stations"
@@ -77,7 +80,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['DELETE_STATION']),
+    ...mapMutations(['DELETE_STATION', 'UPDATE_STATIONS']),
     ...mapActions(['FETCH_ITEMS']),
     refresh() {
       if (!this.stationsIds.length) return;

@@ -28,8 +28,8 @@ export default new Vuex.Store({
     DELETE_STATION(state, id) {
       state.stations = state.stations.filter(station => station.id !== id);
     },
-    ADD_STATIONS(state, refreshedStations) {
-      state.stations = refreshedStations;
+    UPDATE_STATIONS(state, updatedStations) {
+      state.stations = updatedStations;
     },
     SET_REPEATED_ID(state, id) {
       state.repeatedId = id;
@@ -64,7 +64,7 @@ export default new Vuex.Store({
       return axios
         .get(endpoint)
         .then(({ data }) => {
-          context.commit('ADD_STATIONS', data.list);
+          context.commit('UPDATE_STATIONS', data.list);
           return data;
         })
         .catch((e) => {
