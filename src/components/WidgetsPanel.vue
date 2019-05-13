@@ -99,6 +99,7 @@ export default {
 
   .draggable-source--is-dragging {
     background-color: #f1f5f8;
+    transform: scaleX(.95);
   }
   .draggable-source--is-dragging > * {
     opacity: 0;
