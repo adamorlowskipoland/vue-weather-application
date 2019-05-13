@@ -56,23 +56,19 @@ export default {
   methods: {
     ...mapActions(['FETCH_ITEM']),
     validate(val) {
-      //  TODO: add validation on swiss postal Code
       this.errors = [];
       if (!(val.length === 4)) {
         this.errors.push('Input must be 4 digits');
-        return false;
       }
       if (+val < 1000) {
         this.errors.push('Swiss codes starts from 1000');
-        return false;
       }
       if (this.disabled) {
         this.errors.push(
           `Can't add station, there are already ${this.$options.widgetsLimit} of them.`,
         );
-        return false;
       }
-      return true;
+      return !this.errors.length;
     },
     submit() {
       const searchQueryValid = this.validate(this.query);
