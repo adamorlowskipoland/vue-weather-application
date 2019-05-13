@@ -62,6 +62,10 @@ export default {
         this.errors.push('Input must be 4 digits');
         return false;
       }
+      if (+val < 1000) {
+        this.errors.push('Swiss codes starts from 1000');
+        return false;
+      }
       if (this.disabled) {
         this.errors.push(
           `Can't add station, there are already ${this.$options.widgetsLimit} of them.`,
