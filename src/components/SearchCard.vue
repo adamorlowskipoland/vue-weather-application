@@ -1,5 +1,8 @@
 <template>
-  <div class="block max-w-md">
+  <div
+    class="block max-w-md border-l-4 shadow"
+    :class="{'border-green': !disabled}"
+  >
     <form
       class="form sm:flex items-end justify-around p-4 md:px-8 sm:pt-6 sm:pb-12"
       :title="disabled && 'Only 10 widgets can be added.'"
