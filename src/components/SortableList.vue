@@ -46,7 +46,9 @@ export default {
     });
   },
   render() {
-    return this.$slots.default[0];
+    return this.$scopedSlots.default({
+      items: this.value,
+    });
   },
 };
 </script>
