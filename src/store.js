@@ -26,21 +26,21 @@ export default new Vuex.Store({
       state.stations.push(newStation);
     },
     DELETE_STATION(state, id) {
-      state.stations = state.stations.filter(station => station.id !== id);
+      this.state.stations = state.stations.filter(station => station.id !== id);
     },
     UPDATE_STATIONS(state, updatedStations) {
-      state.stations = updatedStations;
+      this.state.stations = updatedStations;
     },
     SET_REPEATED_ID(state, id) {
-      state.repeatedId = id;
+      this.state.repeatedId = id;
       setTimeout(() => {
-        state.repeatedId = null;
+        this.state.repeatedId = null;
       }, 2000);
     },
   },
   actions: {
     FETCH_ITEM(context, query) {
-      const endpoint = `${process.env.VUE_APP_API_SPECIFIC_ENDPOINT}weather?zip=${query},ch&units=metric&appid=${process.env.VUE_APP_API_KEY}`;
+      const endpoint = `${process.env.VUE_APP_API_ENDPOINT}weather?zip=${query},ch&units=metric&appid=${process.env.VUE_APP_API_KEY}`;
       return axios
         .get(endpoint)
         .then(({ data }) => {
@@ -60,7 +60,7 @@ export default new Vuex.Store({
         });
     },
     FETCH_ITEMS(context, query) {
-      const endpoint = `${process.env.VUE_APP_API_SEVERAL_ENDPOINT}group?id=${query}&units=metric&appid=${process.env.VUE_APP_API_KEY}`;
+      const endpoint = `${process.env.VUE_APP_API_ENDPOINT}group?id=${query}&units=metric&appid=${process.env.VUE_APP_API_KEY}`;
       return axios
         .get(endpoint)
         .then(({ data }) => {
