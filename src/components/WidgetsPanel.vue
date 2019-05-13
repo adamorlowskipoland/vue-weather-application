@@ -1,12 +1,12 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <section class="panel">
     <sortable-list>
-      <div class="flex -mx-2 mb-4 flex-wrap">
+      <div class="flex -mx-2 mb-4 flex-wrap outline-none">
         <sortable-item
           v-for="station in stations"
           :key="station.id"
         >
-          <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-2 mb-12">
+          <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-2 mb-12 sortable-item outline-none">
             <transition name="fade">
               <widget-station
                 v-bind="{station}"
@@ -25,7 +25,7 @@
                 </template>
                 <template v-slot:action>
                   <sortable-handler>
-                    <svg class="sortable-handler" width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M14 4h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 4h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm6 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm-6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm-6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/></svg>
+                    <svg class="station__sort-icon" width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M14 4h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 4h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm6 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm-6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm-6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/></svg>
                   </sortable-handler>
                 </template>
               </widget-station>
@@ -91,14 +91,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  .sortable-handler {
-    @apply absolute pin-t pin-r text-grey;
-    transition: color .3s ease;
-    &:hover {
-      @apply text-grey-dark;
-      cursor: all-scroll;
-    }
+
+  .draggable-source--is-dragging {
+    background-color: #f1f5f8;
   }
+  .draggable-source--is-dragging > * {
+    opacity: 0;
+  }
+
+
   .highlight {
     -webkit-animation: HIGHLIGHTING-ANIMATION 1s infinite; /* Safari 4+ */
     -moz-animation:    HIGHLIGHTING-ANIMATION 1s infinite; /* Fx 5+ */

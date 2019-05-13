@@ -46,7 +46,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .station {
-    @apply relative border-l-4 shadow-md p-2 pt-12 pb-6;
+    @apply relative border-l-4 shadow-md p-2 pt-12 pb-6 bg-white;
     transition: background-color .3s ease, color .3s ease;
     &__location {
       @apply p-1 -ml-1 bg-white text-black absolute pin-t font-bold tracking-wide;
@@ -59,5 +59,23 @@ export default {
         @apply bg-pink-lightest;
       }
     }
+    &__sort-icon {
+      @apply absolute pin-t pin-r text-grey;
+      transition: color .3s ease;
+      height: 2rem;
+      width: 2rem;
+      cursor: move;
+      color: #b8c2cc;
+      &:hover {
+        @apply text-grey-dark;
+        color: #3d4852;
+      }
+    }
   }
+  /*.station.draggable-source--is-dragging {*/
+  /*  background-color: #f1f5f8;*/
+  /*}*/
+  /*.station.draggable-source--is-dragging > * {*/
+  /*  opacity: 0;*/
+  /*}*/
 </style>
