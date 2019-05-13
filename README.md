@@ -1,4 +1,5 @@
 # weather-application
+[![Build Status](https://travis-ci.com/adamorlowskipoland/vue-weather-application.svg?branch=master)](https://travis-ci.com/adamorlowskipoland/vue-weather-application)
 
 ## Project setup
 ```
